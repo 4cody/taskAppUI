@@ -1,0 +1,85 @@
+.App {
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+}
+
+/*  Landing component */
+
+.landing {
+    position: relative;
+    width: 800px;
+    height: 900px;
+
+    border: 1px solid black;
+}
+
+section {
+    height: 50%;
+    border: 1px solid black;
+}
+
+.sectionLanding {
+    display: grid;
+    place-items: center;
+}
+
+.sectionLanding {
+    display: grid;
+    place-items: center;
+}
+
+/*  Login component  */
+
+#loginForm {
+    margin-bottom: 50px;
+
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 40px 40px;
+    grid-template-areas: 
+        ". . . e e e e s s . . ."
+        ". . . p p p p s s . . ."
+}
+
+#emailInput{
+    grid-area: e;
+}
+
+#passwordInput {
+    grid-area: p;
+}
+
+#submitBtn {
+    grid-area: s;
+}
+
+
+/* Title component within landing */
+
+.titleAndInfo {
+    margin-bottom: 50px;
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.titleAndInfo > h1 {
+    font-size: 5em;
+    margin: 20px;
+}
+
+.titleAndInfo > h1 > span {
+    color: orange
+}
+
+.landingInfoIcon:hover {
+    color: blue;
+}
+
+.toggled {
+    position: absolute;
+    top: 0;
+}
