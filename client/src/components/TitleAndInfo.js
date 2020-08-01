@@ -25,7 +25,11 @@ export default class TitleAndInfo extends Component {
 
     render() {
         return (
-            <div className='titleAndInfo'>
+            <div className={
+                this.state.infoToggled ?
+                    'titleAndInfo toggled-titleInfo' :
+                    'titleAndInfo'
+            }>
                 <h1><span>T</span>ask<span>A</span>id</h1>
                 
                 <div className='infoIcon' onClick={this.handleInfoToggle}>
@@ -34,13 +38,29 @@ export default class TitleAndInfo extends Component {
                         <FontAwesomeIcon 
                             className='landingInfoIcon' 
                             icon={faTimesCircle} 
-                            size="2x" /> :
+                            size="3x" /> :
                         <FontAwesomeIcon 
                             className='landingInfoIcon' 
                             icon={faQuestionCircle} 
                             size="2x" />
                     }
                 </div>
+                
+                <div className={
+                    this.state.infoToggled ?
+                        'appInfo toggled-appInfo' :
+                        'appInfo'
+                }>
+                    <p> 
+                        TaskAid is a simple and effective task managment system to aid your day to day life.
+                        With it you can organise and keep track of the various things you need to get done on one easy-to-use platform. 
+                    </p>
+                    <br/>
+                    <p>
+                        The only emails you will recieve are upon the creation of you account and if you delete your account.
+                    </p>
+                </div>
+
             </div>
         )
     }

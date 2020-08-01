@@ -19,19 +19,18 @@ export default class Landing extends Component {
         }, console.log('state in landing is ' + this.state.toggled))
     }
 
-    
-
     render() {
         return (
             <div className='landing'>
                 
-                <section className='sectionLanding'>
+                <section className='sectionLandingTop'>
                     <LoginForm />
                 </section>
+
                 <section className={
                     this.state.toggled === false ? 
-                    'sectionLanding' :
-                    'sectionLanding toggled'
+                    'sectionLandingBot' :
+                    'sectionLandingBot toggled'
                 }>
                     <TitleAndInfo aProp={this.intakeChangeAndHandle} />
                 </section>

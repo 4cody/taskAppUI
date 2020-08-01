@@ -20,14 +20,27 @@ section {
     border: 1px solid black;
 }
 
-.sectionLanding {
+.sectionLandingTop {
     display: grid;
     place-items: center;
 }
 
-.sectionLanding {
+.sectionLandingBot {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+
+
     display: grid;
     place-items: center;
+
+    transition: all .5s ease;
+}
+
+.toggled {
+    width: 100%;
+    height: 100%;
 }
 
 /*  Login component  */
@@ -41,7 +54,7 @@ section {
     grid-template-rows: 40px 40px;
     grid-template-areas: 
         ". . . e e e e s s . . ."
-        ". . . p p p p s s . . ."
+        ". . . p p p p s s . . .";
 }
 
 #emailInput{
@@ -60,7 +73,8 @@ section {
 /* Title component within landing */
 
 .titleAndInfo {
-    margin-bottom: 50px;
+    height: 100%;
+    width: 100%;
     text-align: center;
 
     transition: 0.3s;
@@ -68,18 +82,36 @@ section {
 
 .titleAndInfo > h1 {
     font-size: 5em;
-    margin: 20px;
+    letter-spacing: 5px;
 }
 
 .titleAndInfo > h1 > span {
     color: orange
 }
 
+.infoIcon {
+    flex-grow: 1;
+}
+
 .landingInfoIcon:hover {
     color: blue;
 }
 
-.toggled {
+.toggled-titleInfo {
+    overflow: hidden;
+    background: red;
     position: absolute;
-    top: 0;
+
+    padding-top: 20%;
+}
+
+.appInfo {
+    display: none;
+    font-size: 1.5em;
+}
+
+.toggled-appInfo {
+    padding: 0 10%;
+    padding-top: 15%;
+    display: block;
 }
