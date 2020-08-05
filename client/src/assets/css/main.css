@@ -115,3 +115,56 @@ section {
     padding-top: 15%;
     display: block;
 }
+
+/*  Dashboard -----  */
+
+.dashboardContainer {
+    width: 800px;
+    height: 900px;
+
+    border: 1px solid black;
+}
+
+.dashboardBanner {
+    border-bottom: 30px inset rgb(144, 144, 235);
+
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 60px 40px 20px;
+    grid-template-areas: 
+        ". . . . . n "
+        ". . b b . ."
+        ". . . . . .";
+}
+
+.dashboardBanner > h2 {
+    grid-area: n;
+}
+
+.dashboardBanner > button {
+    grid-area: b;
+}
+
+.dashboardFilter {
+    
+}
+
+.dashboardFilter > ul {
+    list-style-type: none;
+
+    display: flex;
+    justify-content: center;
+}
+
+.dashboardFilter > ul > li {
+    margin: 6px 1px;
+    padding: 0 3px;
+    border: 1px solid black;
+    background: #999;
+
+    width: 100px;
+    text-align: center;
+
+    cursor: pointer;
+}

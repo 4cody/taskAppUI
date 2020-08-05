@@ -1,27 +1,25 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-
-import Landing from './components/Landing'
-import Dashboard from './components/Dashboard'
+// import { ProtectedRoute } from './components/ProtectedRoute'
+import { Route, Switch } from 'react-router-dom'
+import { Landing } from './components/Landing'
+import { Dashboard } from './components/Dashboard'
 
 function App() {
   return (
-    <Router>
-      <div className='App'>
-        <Switch>
-          <Route path="/dash">
-            <Dashboard />
-          </Route>
-          <Route path="/">
-            <Landing />
-          </Route> 
-        </Switch> 
-      </div>
-    </Router>
+    <div className='App'>
+      <Switch>
+
+        <Route path='/' exact component={Landing} />
+
+        {/* <ProtectedRoute 
+          path='/dash' 
+          exact 
+          render={() => <Dashboard />} /> */}
+
+        <Route path='/dash' component={Dashboard} />
+      </Switch>
+
+    </div>
   );
 }
 
