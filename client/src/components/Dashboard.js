@@ -11,9 +11,13 @@ export const Dashboard = () => {
         setDisplay(d)
     }
 
-    useEffect(() => {
-        console.log(display)
-    })
+    // useEffect(async () => {
+    //     let creds = {
+    //         'Authorization'
+    //     }
+    //     // console.log(display)
+    //     const res = await axios.get('http://localhost:3007/tasks', )
+    // })
 
     return (
         <div className='dashboardContainer'>
@@ -41,7 +45,7 @@ export const Dashboard = () => {
                         <div 
                             onClick={handleChange} 
                             className='filterOption'
-                            sortvalue='completed'>Completed</div>
+                            sortvalue='done'>Done</div>
                     </li>
                 </ul>
             </div>

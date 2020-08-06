@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
+import Auth from '../assets/js/Auth'
+import { useHistory } from "react-router-dom";
 
-export const LoginForm = ()  => {
+export const LoginForm = (props)  => {
+    let history = useHistory()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        alert(`Submitting Name ${email}, ${password}`)
+        let user = {
+            email,
+            password
+        }
+
+        Auth.login(user, () => {
+            history.push('/dash')
+        })
     }
 
     return (

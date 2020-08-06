@@ -2,30 +2,25 @@ import axios from 'axios'
 
 const Auth = {
     isAuthed: false,
-    async logIn(e, p) {
+
+    async login(creds, cb) {
+
+        let email = creds.email
+        let password = creds.password
+
         try {
-            const res = await axios.post(
+            const response = await axios.post(
                 'http://localhost:3007/users/login',
-                {
-                    email: e,
-                    password: p
-                }
+                {email, password}
             )
-
-            if(res.status === 200) {
-                // const user = res.data
-                
-                this.isAuthed = true;
-                
-                let authRes = {
-                    isAuthed: this.isAuthed,
-                    userName: res.data.user.name
-                }
-
-                return authRes
+            let token = response.data.token
+            if(response.status === 200) {
+                Auth.isAuthed = true
+                localStorage.setItem('token', token)
+                cb()
             }
-        } catch (err) {
-            console.log(err)
+        } catch (err) { 
+            return err 
         }
     }
 }
