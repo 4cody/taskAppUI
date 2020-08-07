@@ -17,7 +17,7 @@ const Auth = {
             if(response.status === 200) {
                 Auth.isAuthed = true
                 localStorage.setItem('token', token)
-                cb()
+                cb(response.data.user.name)
             }
         } catch (err) { 
             return err 
