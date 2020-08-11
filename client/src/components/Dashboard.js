@@ -5,9 +5,10 @@ import Task from './Task'
 import '../assets/css/main.css'
 
 export const Dashboard = (props) => {
-    // const [display, setDisplay] = useState('all')
     const [tasks, setTasks] = useState([])
+    const [completed, setCompleted] = useState([])
     const [modalIsToggled, setModal] = useState(false)
+    const [radioSelect, selectRadio] = useState('todo')
 
     const token = localStorage.getItem('token')
     const config = {
@@ -18,18 +19,24 @@ export const Dashboard = (props) => {
             'http://localhost:3007/tasks', 
             config
         )
-        setTasks(res.data)
+        // Sort incomming tasks on 'completed' property 
+        let todos = []
+        let done = []
+        res.data.forEach(t => {
+            if(t.completed === true) {
+                done.push(t)
+            } else {
+                todos.push(t)
+            }
+        })
+
+        setTasks(todos)
+        setCompleted(done)
     }
 
     useEffect(() => {
         getTasks()
     }, [])
-
-    // const handleDisplayChange = evt => {
-    //     const d = evt.target.attributes.sortvalue.value
-    //     setDisplay(d)
-    //     console.log(display)
-    // }
 
     const handleTaskChange = async evt => {
         const token = localStorage.getItem('token')
@@ -48,25 +55,16 @@ export const Dashboard = (props) => {
         getTasks()
     }
 
-    const handleTaskClick = evt => {
-        console.log(evt.target.classlist)
-    }
-
     const mapTasks = (taskArr, filter) => {
         const mapped = taskArr.map(t => {
             const date = t.createdAt.slice(5,10)
-            // const done = t.completed 
-            // ? 'Complete' : 'Not Complete'
-            console.log(t._id)
             return(
                 <Task
                     date={date}
-                    data={t.completed}
                     key={t._id}
                     id={t._id}
                     description={t.description}
                     done={t.completed}
-                    taskClick={handleTaskClick}
                     taskChange={handleTaskChange}
                  />
             )
@@ -107,32 +105,26 @@ export const Dashboard = (props) => {
                 null
             }
             <div className='dashboardBanner'>
+                <h3><span>T</span>ask<span>A</span>id</h3>
                 <h2>Hi {props.user}</h2>
                 <button onClick={toggleNewTaskModal}>Add Task</button>
-            </div>
-                               
-            {/* <ul className='dashboardFilter'>
-                <li>
-                    <div 
-                        onClick={handleDisplayChange} 
-                        className='filterOption'
-                        sortvalue='all' >All</div>
-                </li>
-                
-                <li>
-                    <div 
-                        onClick={handleDisplayChange} 
-                        className='filterOption'
-                        sortvalue='todo'>Todo</div>
-                </li>
+                {/* <form className='listToggle'>
+                    <div>
+                        <input
+                        type="radio"
+                        value="option1"
+                        checked={true}
+                        />Todo
+                    </div>
 
-                <li>
-                    <div 
-                        onClick={handleDisplayChange} 
-                        className='filterOption'
-                        sortvalue='done'>Done</div>
-                </li>
-            </ul> */}
+                    <div>
+                        <input
+                        type="radio"
+                        value="option2"
+                        />Complete
+                    </div>
+                </form> */}
+            </div>                    
             
             <div className="itemList">
                     {mapTasks(tasks)}
