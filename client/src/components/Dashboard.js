@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Modal from './Modal'
+import Task from './Task'
 import '../assets/css/main.css'
 
 export const Dashboard = (props) => {
@@ -8,18 +9,19 @@ export const Dashboard = (props) => {
     const [tasks, setTasks] = useState([])
     const [modalIsToggled, setModal] = useState(false)
 
+    const token = localStorage.getItem('token')
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+    const getTasks = async () => {
+        const res = await axios.get(
+            'http://localhost:3007/tasks', 
+            config
+        )
+        setTasks(res.data)
+    }
+
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        }
-        const getTasks = async () => {
-            const res = await axios.get(
-                'http://localhost:3007/tasks', 
-                config
-            )
-            setTasks(res.data)
-        }
         getTasks()
     }, [])
 
@@ -29,18 +31,44 @@ export const Dashboard = (props) => {
     //     console.log(display)
     // }
 
+    const handleTaskChange = async evt => {
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        }
+        const bodyParameters = {
+           completed: true
+        };    
+        const taskId = evt.target.parentNode.attributes.id.value
+        await axios.patch(
+            `http://localhost:3007/tasks/${taskId}`,
+            bodyParameters,
+            config
+        )
+        getTasks()
+    }
+
+    const handleTaskClick = evt => {
+        console.log(evt.target.classlist)
+    }
+
     const mapTasks = (taskArr, filter) => {
         const mapped = taskArr.map(t => {
             const date = t.createdAt.slice(5,10)
-            const c = t.completed ? 'Complete' : 'Not Complete'
+            // const done = t.completed 
+            // ? 'Complete' : 'Not Complete'
+            console.log(t._id)
             return(
-                <div key={t._id} 
-                  className='task'
-                  data-done={t.completed}>
-                    <h3>{date}</h3>
-                    <h3>{t.description}</h3>
-                    <h3>{c}</h3>
-                </div>
+                <Task
+                    date={date}
+                    data={t.completed}
+                    key={t._id}
+                    id={t._id}
+                    description={t.description}
+                    done={t.completed}
+                    taskClick={handleTaskClick}
+                    taskChange={handleTaskChange}
+                 />
             )
         })
         return mapped

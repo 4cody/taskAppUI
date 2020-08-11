@@ -264,10 +264,17 @@ section {
 }
 
 .task > h3 {
+    align-self: center;
+
     padding: 4px;
 
     text-align: center;
 
     flex-basis: 0;
     flex-grow: 1;
+}
+
+.task > button {
+    margin: 7px;
+    padding: 5px;
 }
